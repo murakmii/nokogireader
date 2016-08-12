@@ -51,7 +51,7 @@ class Rss2 < Nokogireader::Reader
   end
 end
 
-data = data = Rss2.new.read(File.open('rss2.xml'))
+data = Rss2.new.read(File.open('rss2.xml'))
 puts "Items: #{data[:rss][:channel][:item].size}" # => 0. If specified "dont_store_data", data isn't stored.
 ```
 

@@ -40,5 +40,13 @@ module Nokogireader
     def [](child_name)
       children[child_name.to_s]
     end
+
+    def method_missing(name, *args)
+      if args.length == 0 && children.key?(name.to_s)
+        children[name.to_s]
+      else
+        super(name, *args)
+      end
+    end
   end
 end
