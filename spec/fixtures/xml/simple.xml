@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<books>
+  <metadata>
+    <date created_at="2016-01-01" />
+    <books>2</books>
+  </metadata>
+  <book>
+    <title>book 1</title>
+    <page>34</page>
+  </book>
+  <book>
+    <title>book 2</title>
+    <page>350</page>
+  </book>
+</books>
