@@ -70,4 +70,21 @@ describe Nokogireader::ReadData do
       it { is_expected.to eq [] }
     end
   end
+
+  describe '#method_missing' do
+    let(:data) { described_class.new(nil, definition, node_mock) }
+    before { data.children['test'] = :foo }
+
+    context 'when no key in children' do
+      it 'raises NoMethodError' do
+        expect { data.bar }.to raise_error(NoMethodError)
+      end
+    end
+
+    context 'when exists key in children' do
+      it 'returns data' do
+        expect(data.test).to be :foo
+      end
+    end
+  end
 end

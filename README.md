@@ -25,9 +25,9 @@ class Rss2 < Nokogireader::Reader
 end
 
 data = Rss2.new.read(File.open('rss2.xml'))
-puts "Version: #{data[:rss].attributes[:version]}"
-puts "Items: #{data[:rss][:channel][:item].size}"
-data[:rss][:channel][:item].each do |item|
+puts "Version: #{data.rss.attributes[:version]}"
+puts "Items: #{data.rss.channel.item.size}"
+data.rss.channel.item.each do |item|
   puts " > #{item[:title].text}"
 end
 ```
@@ -51,8 +51,8 @@ class Rss2 < Nokogireader::Reader
   end
 end
 
-data = data = Rss2.new.read(File.open('rss2.xml'))
-puts "Items: #{data[:rss][:channel][:item].size}" # => 0. If specified "dont_store_data", data isn't stored.
+data = Rss2.new.read(File.open('rss2.xml'))
+puts "Items: #{data.rss.channel.item].size}" # => 0. If specified "dont_store_data", data isn't stored.
 ```
 
 ## Contributing
