@@ -10,21 +10,15 @@ module Nokogireader
       end
     end
 
-    def self.elements(name, opts = {}, &block)
-      root_definition.configure do
-        elements(name, opts, &block)
-      end
-    end
-
     def read(xml)
-      root = self.class.root_definition
-      defstack = []
-      data = ReadData.new(nil, root, nil)
+      defstack = [self.class.root_definition]
+      data = ReadData.new(nil, defstack.last, nil)
 
       build_xml_reader(xml).each do |n|
         if n.node_type == 1
-          d = defstack.last || root
-          defstack << (d.accept?(n) ? d.children[n.name] : nil)
+          defstack << if defstack.last && defstack.last.accept?(n)
+                        defstack.last.children[n.name]
+                      end
           data = data.add_child(defstack.last, n) if defstack.last
         elsif n.node_type == 3
           data.text = n.value if defstack.last && defstack.last.accept?(n)
